@@ -23,9 +23,3 @@ dev-deps:
 
 clean:
 	go clean
-	rm -f nat-builder
-
-dist-clean:
-	rm -rf pkg src bin
-
-ci-deps:
