@@ -8,8 +8,8 @@ Once all of them are fully processed it will emit back a message 'nats.create.do
 
 ## Build status
 
-* Master: [![CircleCI Master](https://circleci.com/gh/r3labs/nat-builder/tree/master.svg?style=svg&circle-token=cc4c62fca2fde3caff70a0119f15b5b2e88b84f8)](https://circleci.com/gh/r3labs/nat-builder/tree/master)
-* Develop: [![CircleCI Develop](https://circleci.com/gh/r3labs/nat-builder/tree/develop.svg?style=svg&circle-token=cc4c62fca2fde3caff70a0119f15b5b2e88b84f8)](https://circleci.com/gh/r3labs/nat-builder/tree/develop)
+* Master: [![CircleCI](https://circleci.com/gh/ErnestIO/nat-builder/tree/master.svg?style=svg)](https://circleci.com/gh/ErnestIO/nat-builder/tree/master)
+* Develop: [![CircleCI](https://circleci.com/gh/ErnestIO/nat-builder/tree/develop.svg?style=svg)](https://circleci.com/gh/ErnestIO/nat-builder/tree/develop)
 
 
 ## Installation
