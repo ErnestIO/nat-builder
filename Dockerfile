@@ -7,4 +7,4 @@ WORKDIR /go/src/github.com/ernestio/nat-builder
 
 RUN make deps && go install
 
-ENTRYPOINT /go/bin/nat-builder
+ENTRYPOINT ./entrypoint.sh
