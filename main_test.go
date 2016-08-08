@@ -13,7 +13,25 @@ import (
 	"time"
 
 	"github.com/nats-io/nats"
+	"gopkg.in/redis.v3"
 )
+
+var setup = false
+var n *nats.Conn
+var r *redis.Client
+
+func testSetup() {
+	if setup == false {
+		os.Setenv("NATS_URI", "nats://localhost:4222")
+
+		n = natsClient()
+		n.Subscribe("config.get.redis", func(msg *nats.Msg) {
+			n.Publish(msg.Reply, []byte(`{"DB":0,"addr":"localhost:6379","password":""}`))
+		})
+		r = redisClient()
+		setup = true
+	}
+}
 
 type DummyEvent struct {
 	Type string `json:"type"`
@@ -34,12 +52,7 @@ func waitTime(ch chan bool, timeout time.Duration) error {
 }
 
 func TestProvisionAllNatsBasic(t *testing.T) {
-	os.Setenv("NATS_URI", "nats://localhost:4222")
-	os.Setenv("REDIS_ADDR", "localhost:6379")
-
-	n := natsClient()
-	r := redisClient()
-
+	testSetup()
 	processRequest(n, r, "nats.create", "nat.provision")
 
 	ch := make(chan bool)
@@ -75,12 +88,7 @@ func TestProvisionAllNatsBasic(t *testing.T) {
 }
 
 func TestProvisionAllNatsWithInvalidMessage(t *testing.T) {
-	os.Setenv("NATS_URI", "nats://localhost:4222")
-	os.Setenv("REDIS_ADDR", "localhost:6379")
-
-	n := natsClient()
-	r := redisClient()
-
+	testSetup()
 	processRequest(n, r, "nats.create", "nat.provision")
 
 	ch := make(chan bool)
@@ -106,12 +114,7 @@ func TestProvisionAllNatsWithInvalidMessage(t *testing.T) {
 }
 
 func TestProvisionAllnatsWithDifferentMessageType(t *testing.T) {
-	os.Setenv("NATS_URI", "nats://localhost:4222")
-	os.Setenv("REDIS_ADDR", "localhost:6379")
-
-	n := natsClient()
-	r := redisClient()
-
+	testSetup()
 	processRequest(n, r, "nats.create", "nat.provision")
 
 	ch := make(chan bool)
